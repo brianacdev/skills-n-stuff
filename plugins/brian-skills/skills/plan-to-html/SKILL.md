@@ -1,6 +1,6 @@
 ---
 name: plan-to-html
-description: Render a markdown plan as a styled HTML page under `.plan-html/`. Use when the user wants a plan turned into HTML, rendered as a web page, or opened/shared in a browser — either a plan just written in the conversation or a path to a markdown plan file.
+description: Render a markdown plan as a styled HTML page under `.plan-html/`. Use when the user wants a plan turned into HTML, rendered as a web page, or previewed in a browser — either a plan just written in the conversation or a path to a markdown plan file.
 ---
 
 Turn a plan into a self-contained HTML page styled with Pico CSS. The bar is **fidelity**:

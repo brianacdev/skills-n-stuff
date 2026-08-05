@@ -1,6 +1,6 @@
 ---
 name: share-plan
-description: Render a plan as HTML and publish it as a shareable public link. Use when the user wants to publish, share, or get a URL for a plan — from the conversation or a markdown plan file path. Composes plan-to-html (render) and bac7 (host).
+description: Render a plan as HTML and publish it as a shareable public link. Use when the user asks to "share html plan", "publish html plan", or otherwise wants a public URL for a plan — from the conversation or a markdown plan file path. Not for rendering alone (that's plan-to-html). Composes plan-to-html (render) and bac7 (host).
 ---
 
 # share-plan
