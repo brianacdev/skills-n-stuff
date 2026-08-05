@@ -1,0 +1,11 @@
+{
+  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
+  "name": "brian-skills",
+  "version": "0.1.0",
+  "description": "Personal cross-project skills",
+  "author": {
+    "name": "Brian Coleman",
+    "email": "brianarth7@gmail.com"
+  },
+  "keywords": ["skills", "personal", "workflow"]
+}
