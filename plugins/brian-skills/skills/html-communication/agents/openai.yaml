@@ -1,0 +1,4 @@
+interface:
+  display_name: "HTML Communication"
+  short_description: "Create clear standalone HTML communications"
+  default_prompt: "Use $html-communication to present this message as a polished standalone HTML document."
