@@ -1,15 +1,13 @@
 ---
 name: html-communication
-description: Use when the user asks to communicate through an HTML document, wants a plan rendered, shared, or published as HTML, or if they mention "HTML" with no additional context.
+description: Use when the user wants a plan, spec, findings, report, comparison, or UI mocks rendered, shared, or published as a standalone HTML document. Not for HTML that ships as product code.
 ---
 
 # HTML Communication
 
-## When to Use
+## Scope
 
-Use this skill when the user wants a plan, spec, write-up, findings, summary,
-report, comparison, or set of UI mocks presented as readable HTML.
-Do not use it for HTML that ships as part of a product.
+Do not use this skill for HTML that ships as part of a product.
 
 Plans follow the Plans section; everything else follows Document. Both end at Publish.
 

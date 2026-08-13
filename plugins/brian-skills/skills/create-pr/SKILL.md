@@ -26,40 +26,11 @@ Stop if there are no commits to propose. Do not commit user changes. If the work
 
 Treat the repository as MarketDial when the normalized GitHub owner from `origin` is `marketdial`, case-insensitively. Support SSH and HTTPS remote forms.
 
-Only infer a Jira ticket for a MarketDial repository. Match the entire branch name, case-insensitively, against:
-
-```regex
-^ftr-(?:(fiat|green|smart|mdb)|([fgsm]))([0-9]+)(?:-.+)?$
-```
-
-Map the project token to its canonical Jira project:
-
-| Token | Project |
-|---|---|
-| `fiat`, `f` | `FIAT` |
-| `green`, `g` | `GREEN` |
-| `smart`, `s` | `SMART` |
-| `mdb`, `m` | `MDB` |
-
-Combine the canonical project and captured number with a hyphen. Examples: `ftr-fiat123-cool-feature` becomes `FIAT-123`; `ftr-g789-foo2` becomes `GREEN-789`; `ftr-mdb42` becomes `MDB-42`.
-
-If a ticket is identified, query that exact issue through the Jira MCP server. Use its summary and relevant issue context, but reconcile them with the actual branch diff. If Jira is unavailable or the issue cannot be read, say that the fallback was used and derive wording from the diff.
-
-Do not infer Jira tickets from non-MarketDial repositories or loosely matching branch text.
+For a MarketDial repository, read `references/jira-tickets.md` and follow it to derive the ticket and the mandatory title format. For any other repository, skip this step and never infer a Jira ticket.
 
 ## 3. Write title and body
 
-For an identified Jira ticket, write:
-
-```text
-[<JIRA-TICKET>] <short description>
-```
-
-This format is mandatory: use square brackets around the canonical ticket, followed by one space. Never substitute a colon, hyphen, or bare ticket.
-
-Make the short description 5–10 words, specific, and consistent with both Jira and the diff. Exclude the bracketed ticket from the word count. Prefer a concise action/result phrase, sentence case, with no trailing period. Before creating the PR, verify the final Jira title matches `^\[(FIAT|GREEN|SMART|MDB)-[0-9]+\] .+` and recount the description words.
-
-Without a Jira ticket, create a concise title from the commits and diff. Do not invent a ticket or rely only on the branch description.
+With an identified Jira ticket, use the title format from `references/jira-tickets.md`. Without one, create a concise title from the commits and diff. Do not invent a ticket or rely only on the branch description.
 
 Build the PR body from the actual changes:
 

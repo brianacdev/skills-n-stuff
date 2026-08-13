@@ -15,7 +15,7 @@ Stay with the PR until it is actually clean. Do not stop after one check pass if
 4. Read new comments and unresolved review threads, then split them by author:
    - **CodeRabbit threads** (author `coderabbitai`, `coderabbit[bot]`, or `coderabbitai[bot]`): handle autonomously per "CodeRabbit feedback" below.
    - **Everything else** (humans, other bots): verify actionable findings against the code yourself. Treat bot summaries as useful, but confirm before acting.
-5. Fix real issues in focused commits, run relevant tests/builds, push, and return to step 2.
+5. Fix real issues in focused commits, run relevant tests/builds, push, and return to step 2. (CodeRabbit findings instead follow the consolidated-commit flow in "CodeRabbit Feedback".)
 6. Resolve stale review threads only after verifying the code or generated artifact now addresses the comment.
 7. Stop only when checks are passing or intentionally skipped, review decision is acceptable, no actionable comments remain, and no unresolved review threads remain.
 
@@ -70,15 +70,7 @@ owner=$(jq -r '.owner.login // .owner.name' <<<"$repo_json")
 repo=$(jq -r '.name' <<<"$repo_json")
 ```
 
-Use GraphQL for unresolved review threads. Include `pageInfo`; omit `cursor` on the first page, then pass the previous `endCursor` with `-f cursor="$cursor"` while `hasNextPage` is `true`.
-
-```bash
-gh api graphql \
-  -f query='query($owner:String!,$repo:String!,$number:Int!,$cursor:String){repository(owner:$owner,name:$repo){pullRequest(number:$number){reviewThreads(first:100,after:$cursor){pageInfo{hasNextPage endCursor}nodes{id,isResolved,isOutdated,path,line,comments(last:1){nodes{author{login},body,createdAt,url}}}}}}}' \
-  -f owner="$owner" -f repo="$repo" -F number=<number>
-```
-
-Use this loop when a PR may have many review threads:
+Fetch unresolved review threads with this GraphQL loop; it paginates via `pageInfo` and prints one TSV row per unresolved thread:
 
 ```bash
 thread_query='query($owner:String!,$repo:String!,$number:Int!,$cursor:String){repository(owner:$owner,name:$repo){pullRequest(number:$number){reviewThreads(first:100,after:$cursor){pageInfo{hasNextPage endCursor}nodes{id,isResolved,isOutdated,path,line,comments(last:1){nodes{author{login},body,createdAt,url}}}}}}}'
@@ -95,15 +87,6 @@ while :; do
   cursor=$(jq -r '.data.repository.pullRequest.reviewThreads.pageInfo.endCursor' <<<"$page")
   cursor_args=(-f cursor="$cursor")
 done
-```
-
-Filter unresolved threads with `jq`:
-
-```bash
-jq -r '.data.repository.pullRequest.reviewThreads.nodes[]
-  | select(.isResolved==false)
-  | [.id,.path,(.line//""),(.isOutdated|tostring),(.comments.nodes[-1].author.login//""),(.comments.nodes[-1].body|gsub("\n";" ")|.[0:240])]
-  | @tsv'
 ```
 
 Resolve a stale thread only when the fix is verified:

@@ -1,0 +1,4 @@
+interface:
+  display_name: "File Upload"
+  short_description: "Upload a local file to BAC7 and return its public URL"
+  default_prompt: "Use $file-upload to upload this file to BAC7 and share the public link."

@@ -1,6 +1,6 @@
 ---
 name: file-upload
-description: Upload one local file to BAC7 and return its public URL. Use for upload, share, publish, host, public-link, or BAC7 requests.
+description: Upload one local file to BAC7 and return its public URL. Use for upload, share, host, public-link, or BAC7 requests. For publishing rendered HTML plans or docs, use html-communication instead.
 ---
 
 # BAC7

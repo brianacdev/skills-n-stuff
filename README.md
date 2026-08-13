@@ -7,14 +7,14 @@ available in every project — work and personal.
 
 Local (this checkout is the source of truth):
 
-```
+```sh
 /plugin marketplace add /Users/brian/personal/projects/skills-n-stuff
 /plugin install brian-skills@brian-skills
 ```
 
 From GitHub, once pushed:
 
-```
+```sh
 /plugin marketplace add <user>/skills-n-stuff
 /plugin install brian-skills@brian-skills
 ```
@@ -23,7 +23,7 @@ Install at **user scope** to get the skills in every project.
 
 ## Layout
 
-```
+```sh
 .claude-plugin/marketplace.json   # the marketplace: lists plugins in this repo
 plugins/brian-skills/
   .claude-plugin/plugin.json      # plugin manifest (bump version on release)
@@ -40,7 +40,7 @@ an entry to `marketplace.json`.
 Installed plugins are **cached** under `~/.claude/plugins/cache/`, so edits here do not
 take effect until you refresh:
 
-```
+```sh
 /plugin marketplace update brian-skills
 ```
 
@@ -49,8 +49,9 @@ Bump `version` in `plugin.json` when you want the change to land as a new releas
 ## Skill anatomy
 
 `SKILL.md` needs YAML frontmatter with `name` and `description`. The description is the
-only thing Claude sees when deciding whether to load the skill — write it as *what it does
-+ when to use it*, including the phrases you'd actually type.
+only thing Claude sees when deciding whether to load the skill — write it as \*what it does
+
+- when to use it\*, including the phrases you'd actually type.
 
 ```markdown
 ---
