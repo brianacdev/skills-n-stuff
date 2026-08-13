@@ -1,0 +1,4 @@
+interface:
+  display_name: "Babysit PR"
+  short_description: "Watch a PR until clean, auto-fixing Major/Minor CodeRabbit findings"
+  default_prompt: "Use $babysit-pr to monitor the current pull request until checks pass and all review threads are resolved."
