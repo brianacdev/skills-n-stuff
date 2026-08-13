@@ -1,0 +1,9 @@
+interface:
+  display_name: "Create PR"
+  short_description: "Create a PR from the current Git branch"
+  default_prompt: "Use $create-pr to create a GitHub pull request for the current branch."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "jira"
+      description: "Read MarketDial Jira issue details for PR titles"
